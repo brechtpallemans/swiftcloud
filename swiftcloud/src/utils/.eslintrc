@@ -1,0 +1,37 @@
+{
+  "rules": {
+    "no-restricted-imports": [
+      "error",
+      {
+        "paths": [
+          "utils",
+          "models",
+          "db",
+          "services",
+          "consumers",
+          "jobs",
+          "scripts",
+          "subscribers",
+          "migrations",
+          "controllers",
+          "modules",
+          "main"
+        ],
+        "patterns": [
+          "utils/*",
+          "models/*",
+          "db/*",
+          "services/*",
+          "consumers/*",
+          "jobs/*",
+          "scripts/*",
+          "subscribers/*",
+          "migrations/*",
+          "controllers/*",
+          "modules/*",
+          "main/*"
+        ]
+      }
+    ]
+  }
+}
