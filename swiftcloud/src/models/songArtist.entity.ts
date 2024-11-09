@@ -1,7 +1,6 @@
 import { Column, Entity, Index, JoinColumn, ManyToOne } from 'typeorm'
 import { Model } from './generic'
-import { ApiHideProperty, ApiProperty } from '@nestjs/swagger'
-import { Exclude } from 'class-transformer'
+import { ApiProperty } from '@nestjs/swagger'
 import { Song } from './song.entity'
 import { Artist } from './artist.entity'
 import { SongArtistType } from './types'
@@ -16,8 +15,6 @@ export class SongArtist extends Model {
   @Column()
   songId: string
 
-  @ApiHideProperty()
-  @Exclude()
   @ManyToOne(() => Song, { nullable: false })
   @JoinColumn()
   song?: Song
@@ -27,8 +24,6 @@ export class SongArtist extends Model {
   @Column()
   artistId: string
 
-  @ApiHideProperty()
-  @Exclude()
   @ManyToOne(() => Artist, { nullable: false })
   @JoinColumn()
   artist?: Artist
