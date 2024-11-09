@@ -5,25 +5,21 @@ import {
   NotFoundException,
 } from '@nestjs/common'
 import { BaseExceptionFilter } from '@nestjs/core'
-import { EntityNotFoundError, QueryFailedError, TypeORMError } from 'typeorm'
+import { EntityNotFoundError, TypeORMError } from 'typeorm'
 
-interface TypeORMException extends TypeORMError {
-  detail: string
-}
+/**
+ * The reason I put this here is because in a lot of cases the query that is
+ * parsed and sent to the database is just not compatible with the schema.
+ * In that case, I want to return a 400 status due to the user input being
+ * the cause of the error.
+ */
 @Catch(TypeORMError)
 export class TypeOrmErrorFilter extends BaseExceptionFilter {
-  catch(error: TypeORMException, host: ArgumentsHost) {
+  catch(error: TypeORMError, host: ArgumentsHost) {
     switch (true) {
-      case error instanceof QueryFailedError:
-        return super.catch(
-          new BadRequestException(error.detail ?? error.message, {
-            cause: error,
-          }),
-          host
-        )
       case error instanceof EntityNotFoundError:
         return super.catch(
-          new NotFoundException(error.detail ?? error.message, {
+          new NotFoundException(error.message, {
             cause: error,
           }),
           host
