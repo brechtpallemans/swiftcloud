@@ -54,3 +54,13 @@ docker run -p 5432:5432 -e POSTGRES_PASSWORD=password -e POSTGRES_DB=swiftcloud 
 > This would normally be a cron job in the backend service, or an external job. But because it's a one off migration, I opt to write a script so I can redo it once after deployment easily and no manual data parsing is needed.
 
 ### step 11: add api controllers and implement querying algorithms
+
+### step 12: deploy
+
+Spin up a lightsail instance at 5$/month.
+
+Run a docker container for the db and run the api in a docker container.
+
+Install nginx and use letsencrypt to host the api on swiftcloud.pallemans.com.
+
+### step 13: write the readme
