@@ -38,8 +38,8 @@ async function bootstrap() {
 
   if (NODE_ENV !== 'production') {
     const config = new DocumentBuilder()
-      .setTitle('XPM Auth API')
-      .setDescription('XPM Auth API')
+      .setTitle('SwiftCloud API')
+      .setDescription('SwiftCloud API')
       .setVersion(packageJson.version)
       .build()
     const document = SwaggerModule.createDocument(nestApp, config)

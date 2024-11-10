@@ -30,7 +30,12 @@
         <li><a href="#data-parsing-script">Data parsing script</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
+    <li>
+      <a href="#usage">Usage</a>
+      <ul>
+        <li><a href="#examples">Examples</a></li>
+      </ul>
+    </li>
     <li><a href="#roadmap">How it works</a></li>
     <li><a href="#maintainers">Maintainers</a></li>
   </ol>
@@ -173,10 +178,31 @@ The API supports the following features:
 - Querying a single entity by id
   - Relational querying
 
-An example query would be the following:
+### Examples
 
-Give me all songs and their monthly stats that are released between 2019 and 2020, ordered by release year:
-https://swiftcloud.pallemans.com/songs?releaseYear.$between=2019,2020&order=releaseYear&include=album,songMonthlyStats
+Give me all songs in the album named "Red":
+
+```
+https://swiftcloud.pallemans.com/songs?album.title=Red&include=album
+```
+
+Find all albums that contain the keyword: 'the':
+
+```
+https://swiftcloud.pallemans.com/albums?title.$like=the
+```
+
+Give me all songs that are released between 2019 and 2020, ordered by title:
+
+```
+https://swiftcloud.pallemans.com/songs?releaseYear.$between=2019,2020&order=title&include=album,songArtists.artist
+```
+
+What was the top 5 of most popular songs in June:
+
+```
+https://swiftcloud.pallemans.com/songs?include=songMonthlyStats&order=songMonthlyStats.totalPlays.desc&pagination[pageSize]=5&songMonthlyStats.month=6
+```
 
 ## How it works
 
@@ -184,6 +210,6 @@ The query is parsed using a set of predefined tags that match the TypeORM FindOp
 
 ## Maintainers
 
-| name                                                              | email                 | GitHub                                                |
-| ----------------------------------------------------------------- | --------------------- | ----------------------------------------------------- |
-| [Brecht Pallemans](https://www.linkedin.com/in/brecht-pallemans/) | brecht.p@appman.co.th | [brechtpallemans](https://github.com/brechtpallemans) |
+| name                                                              | email                      | GitHub                                                |
+| ----------------------------------------------------------------- | -------------------------- | ----------------------------------------------------- |
+| [Brecht Pallemans](https://www.linkedin.com/in/brecht-pallemans/) | brecht.pallemans@gmail.com | [brechtpallemans](https://github.com/brechtpallemans) |
