@@ -21,7 +21,6 @@ COPY ./nest-cli.json /app/nest-cli.json
 COPY ./src /app/src
 COPY ./tsconfig.build.json /app/tsconfig.build.json
 COPY ./tsconfig.json /app/tsconfig.json
-COPY ./assets /app/assets
 
 RUN npm run build
 
@@ -34,7 +33,6 @@ WORKDIR /app
 
 COPY --from=builder /app/node_modules /app/node_modules
 COPY --from=builder /app/build /app/build
-COPY --from=builder /app/assets /app/assets
 COPY --from=builder /app/package.json /app/package.json
 
 EXPOSE 4000
