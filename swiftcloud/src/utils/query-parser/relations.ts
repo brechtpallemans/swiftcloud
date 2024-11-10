@@ -1,10 +1,10 @@
 import { FindOptionsRelations } from 'typeorm'
 
 export const parseRelations = (
-  include?: string
+  include?: string | string[]
 ): FindOptionsRelations<unknown> => {
   if (!include) return {}
-  const relationsArray = include.split(',')
+  const relationsArray = Array.isArray(include) ? include : include.split(',')
   const relationsObject = {}
 
   const addRelation = (keys: string[], obj: FindOptionsRelations<unknown>) => {

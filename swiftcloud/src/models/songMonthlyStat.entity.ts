@@ -6,12 +6,15 @@ import { Song } from './song.entity'
 @Entity()
 export class SongMonthlyStat extends Model {
   @Column({ type: 'smallint' })
+  @ApiProperty({ example: 2024 })
   year: number
 
   @Column({ type: 'smallint' })
+  @ApiProperty({ example: 8 })
   month: number
 
   @Column({ type: 'bigint' })
+  @ApiProperty({ example: 42069 })
   totalPlays: number
 
   @Index()

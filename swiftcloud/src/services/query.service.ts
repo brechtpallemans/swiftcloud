@@ -3,7 +3,7 @@ import { InjectDataSource } from '@nestjs/typeorm'
 import { Model } from 'models/generic'
 import { DataSource, EntityTarget, ObjectLiteral } from 'typeorm'
 import { parseQuery } from 'utils/query-parser'
-import { RequestQuery } from 'utils/query-parser/types'
+import { RequestQuery, RequestRelationsQuery } from 'utils/query-parser/types'
 
 @Injectable()
 export class QueryService {
@@ -37,7 +37,7 @@ export class QueryService {
 
   async readById<T extends ObjectLiteral & Model>(
     id: string,
-    query: RequestQuery,
+    query: RequestRelationsQuery,
     target: EntityTarget<T>
   ) {
     const repository = this.dataSource.getRepository<Model>(target)

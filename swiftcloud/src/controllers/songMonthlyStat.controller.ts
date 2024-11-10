@@ -10,7 +10,7 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { SongMonthlyStat } from 'models'
 import { QueryService } from 'services'
 import { getListResponseSchema } from 'services/types'
-import { RequestQuery } from 'utils/query-parser/types'
+import { RequestQuery, RequestRelationsQuery } from 'utils/query-parser/types'
 
 @ApiTags('song-monthly-stats')
 @Controller('song-monthly-stats')
@@ -37,7 +37,7 @@ export class SongMonthlyStatController {
   })
   async getById(
     @Param('id', ParseUUIDPipe) id: string,
-    @Query() query: RequestQuery
+    @Query() query: RequestRelationsQuery
   ) {
     return this.queryService.readById(id, query, SongMonthlyStat)
   }

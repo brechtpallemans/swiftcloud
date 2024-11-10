@@ -13,11 +13,11 @@ export abstract class Model {
   @PrimaryGeneratedColumn('uuid')
   id: string
 
-  @ApiProperty({ format: 'date' })
+  @ApiProperty({ format: 'date-time' })
   @CreateDateColumn({ type: 'timestamptz', precision: 3 })
   createdAt: Date
 
-  @ApiProperty({ format: 'date' })
+  @ApiProperty({ format: 'date-time' })
   @UpdateDateColumn({ type: 'timestamptz', precision: 3 })
   updatedAt: Date
 }

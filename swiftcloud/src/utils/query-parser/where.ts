@@ -1,5 +1,6 @@
 import { FindOptionsWhere } from 'typeorm'
 import { deepAssign, parseJsonWithCatch } from '../generic'
+import { parseQueryTags } from './tags'
 
 export const parseWhereQuery = <T>(query): FindOptionsWhere<T> => {
   const where = {}
@@ -16,5 +17,5 @@ export const parseWhereQuery = <T>(query): FindOptionsWhere<T> => {
       return acc[curr]
     }, where)
   }
-  return where
+  return parseQueryTags(where)
 }

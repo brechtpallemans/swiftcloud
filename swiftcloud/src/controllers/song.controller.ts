@@ -6,11 +6,11 @@ import {
   ParseUUIDPipe,
   Query,
 } from '@nestjs/common'
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger'
+import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger'
 import { Song } from 'models'
 import { QueryService } from 'services'
 import { getListResponseSchema } from 'services/types'
-import { RequestQuery } from 'utils/query-parser/types'
+import { RequestQuery, RequestRelationsQuery } from 'utils/query-parser/types'
 
 @ApiTags('songs')
 @Controller('songs')
@@ -23,6 +23,20 @@ export class SongController {
     status: HttpStatus.OK,
     description: 'successful request',
     schema: getListResponseSchema(Song),
+  })
+  @ApiQuery({
+    name: 'releaseYear',
+    required: false,
+    type: 'number',
+    description: 'The year the album was released',
+    example: 2012,
+  })
+  @ApiQuery({
+    name: 'title',
+    required: false,
+    type: 'string',
+    description: 'The album title',
+    example: 'Red',
   })
   async get(@Query() query: RequestQuery) {
     return this.queryService.readList(query, Song)
@@ -37,7 +51,7 @@ export class SongController {
   })
   async getById(
     @Param('id', ParseUUIDPipe) id: string,
-    @Query() query: RequestQuery
+    @Query() query: RequestRelationsQuery
   ) {
     return this.queryService.readById(id, query, Song)
   }
